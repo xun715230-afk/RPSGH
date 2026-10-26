@@ -37,7 +37,7 @@ RPSGH/
 ├── compactbit.m         # Binary-code packing
 ├── hammingDist.m        # Hamming distance computation
 ├── ...                  # Additional MATLAB utilities
-└── data/                 # Locally prepared datasets (not distributed here)
+└── data/                 # Locally prepared datasets 
 ```
 
 Auxiliary scripts not used by the main training path are also present in the original project. Ensure all functions called by `RPSGH_main.m` and `construct_dataset.m` are available on the MATLAB path.
