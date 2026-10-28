@@ -62,7 +62,7 @@ data/
 
 **Dataset files are not provided in this README.** Obtain them from their original distributors and follow the applicable licenses. The supported task identifiers and required `.mat` fields are defined in `construct_dataset.m`.
 
-For each task, the source domain provides labeled training samples, and the target domain is divided into training and query subsets. The example below uses a **class-stratified 10% target query split**. Target training labels are not passed into the model updates; however, the dataset preparation code uses target labels for stratified splitting, determining the class count, and constructing retrieval relevance ground truth. This distinction should be preserved when reporting the experimental protocol.
+For each task, the source domain provides labeled training samples, and the target domain is divided into training and query subsets. The example below uses a **class-stratified 10% target query split**. Target training labels are not passed into the model updates. However, the dataset preparation code uses target labels for stratified splitting, determining the class count, and constructing retrieval relevance ground truth. This distinction should be preserved when reporting the experimental protocol.
 
 Features are L2-normalized per sample and then centered using the joint mean of the source and target **training** features.
 
