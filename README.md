@@ -7,11 +7,9 @@ RPSGH transfers category-level knowledge from a labeled source domain to an unla
 ## Overview
 
 RPSGH consists of three components:
-
 1. **Prototype-enhanced pseudo-labeling.** Orthogonality-constrained class prototypes refine labeled source class centers. The refined centers initialize target-domain clustering, and the resulting source-semantic and target-geometric class probabilities are fused to assign target pseudo-labels.
 2. **Reliability-guided alignment.** Neighborhood reliability weights cross-domain local alignment, while sample reliability weights prototype alignment to reduce the influence of uncertain associations and representations.
 3. **Unified semantic graph hashing.** A graph combines source-domain supervision, source–target semantic associations, and target-domain neighborhood structure. A semantic-guided scale factor adjusts the overall strength of the target–target relations before asymmetric similarity alignment in Hamming space.
-
 The implementation uses **pre-extracted features**; it does not train a deep feature extractor.
 
 ## Requirements
@@ -19,7 +17,6 @@ The implementation uses **pre-extracted features**; it does not train a deep fea
 - MATLAB (the minimum supported release has not been established).
 - **Statistics and Machine Learning Toolbox** (`kmeans`, `pdist2`, and `dummyvar`).
 - Sufficient memory for the dataset; the implementation constructs dense pairwise matrices.
-
 Run the scripts from the repository root, because dataset loading relies on relative paths. Compatibility with GNU Octave has not been verified.
 
 ## Repository Structure
@@ -44,9 +41,7 @@ Auxiliary scripts not used by the main training path are also present in the ori
 
 ## Datasets and Protocol
 
-The dataset loader supports adaptation tasks from **MNIST–USPS**, **COIL20**, **Office-31**, **Office-Home**, and other cross-dataset image retrieval benchmarks implemented in `construct_dataset.m`.
-
-Prepare the corresponding pre-extracted feature files under `data/`, preserving the relative paths and variable names expected by `construct_dataset.m`. Representative directories include:
+The dataset loader supports adaptation tasks from **MNIST–USPS**, **COIL20**, **Office-31**, **Office-Home**, and other cross-dataset image retrieval benchmarks implemented in `construct_dataset.m`. We prepare the corresponding pre-extracted feature files under `data/`, preserving the relative paths and variable names expected by `construct_dataset.m`. Representative directories include:
 
 ```text
 data/
@@ -60,11 +55,7 @@ data/
 └── VLSC/
 ```
 
-**Dataset files are not provided in this README.** Obtain them from their original distributors and follow the applicable licenses. The supported task identifiers and required `.mat` fields are defined in `construct_dataset.m`.
-
-For each task, the source domain provides labeled training samples, and the target domain is divided into training and query subsets. The example below uses a **class-stratified 10% target query split**. Target training labels are not passed into the model updates. However, the dataset preparation code uses target labels for stratified splitting, determining the class count, and constructing retrieval relevance ground truth. This distinction should be preserved when reporting the experimental protocol.
-
-Features are L2-normalized per sample and then centered using the joint mean of the source and target **training** features.
+**Dataset files are not provided in this README.** Obtain them from their original distributors and follow the applicable licenses. The supported task identifiers and required `.mat` fields are defined in `construct_dataset.m`. For each task, the source domain provides labeled training samples, and the target domain is divided into training and query subsets. The example below uses a **class-stratified 10% target query split**. Target training labels are not passed into the model updates. However, the dataset preparation code uses target labels for stratified splitting, determining the class count, and constructing retrieval relevance ground truth. This distinction should be preserved when reporting the experimental protocol. Features are L2-normalized per sample and then centered using the joint mean of the source and target **training** features.
 
 ## Quick Start
 
@@ -96,9 +87,7 @@ fprintf('%s | %d bits | Single-MAP: %.2f%% | Cross-MAP: %.2f%%\n', ...
     DB_name, param.bit, single_MAP, cross_MAP);
 ```
 
-The output MAP values are already expressed as **percentages**; do not multiply them by 100 again.
-
-The included `RPSGH_Demo.m` may also be run from the repository root. In the version described by the supplied project documentation, its active sections perform a 64-bit single-run `MNIST-USPS` experiment followed by ten 64-bit `D-A` runs; the multi-bit benchmark loop is not enabled by default. Review the demo settings before treating its output as a reproduction of every table in the paper.
+The output MAP values are already expressed as **percentages**; do not multiply them by 100 again. The included `RPSGH_Demo.m` may also be run from the repository root. In the version described by the supplied project documentation, its active sections perform a 64-bit single-run `MNIST-USPS` experiment followed by ten 64-bit `D-A` runs; the multi-bit benchmark loop is not enabled by default. Review the demo settings before treating its output as a reproduction of every table in the paper.
 
 ## Parameters
 
@@ -125,9 +114,7 @@ Target-domain test samples serve as queries in both settings:
 | **Cross-domain retrieval (Cross-MAP)** | Target test samples | Labeled source training samples |
 | **Single-domain retrieval (Single-MAP)** | Target test samples | Unlabeled target training samples |
 
-The final training codes are divided into source and target database codes. A ridge-regression mapping from centered original training features to learned binary codes encodes unseen queries. Retrieval ranks all database items by Hamming distance; MAP is computed from class-label relevance and reported on a 0–100 scale. The reported metric is full-database MAP, not MAP@K.
-
-For multi-bit studies, configure `param.bit` using `[16, 32, 48, 64, 96, 128]` and repeat experiments with documented random seeds and split settings. The current demo does not automatically save complete multi-task, multi-bit results.
+The final training codes are divided into source and target database codes. A ridge-regression mapping from centered original training features to learned binary codes encodes unseen queries. Retrieval ranks all database items by Hamming distance; MAP is computed from class-label relevance and reported on a 0–100 scale. The reported metric is full-database MAP, not MAP@K. For multi-bit studies, configure `param.bit` using `[16, 32, 48, 64, 96, 128]` and repeat experiments with documented random seeds and split settings. The current demo does not automatically save complete multi-task, multi-bit results.
 
 ## Reproducibility Notes
 
