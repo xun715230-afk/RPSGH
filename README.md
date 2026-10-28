@@ -1,6 +1,6 @@
 # RPSGH: Reliability-Guided Prototype Semantic Graph Hashing
 
-**MATLAB implementation for unsupervised domain adaptive image retrieval.**
+**MATLAB implementation for unsupervised domain-adaptive image retrieval.**
 
 RPSGH transfers category-level knowledge from a labeled source domain to an unlabeled target domain and learns compact binary codes for efficient retrieval. The framework combines prototype-enhanced pseudo-labeling, reliability-guided alignment, and semantic graph-based hash learning.
 
@@ -17,7 +17,7 @@ The implementation uses **pre-extracted features**; it does not train a deep fea
 - MATLAB (the minimum supported release has not been established).
 - **Statistics and Machine Learning Toolbox** (`kmeans`, `pdist2`, and `dummyvar`).
 - Sufficient memory for the dataset; the implementation constructs dense pairwise matrices.
-Run the scripts from the repository root, because dataset loading relies on relative paths. Compatibility with GNU Octave has not been verified.
+Run the scripts from the repository root because dataset loading relies on relative paths. Compatibility with GNU Octave has not been verified.
 
 ## Repository Structure
 
